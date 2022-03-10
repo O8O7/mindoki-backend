@@ -14,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'portfolio',
     'question',
     'common',
+
+    # AWS S3用パッケージ
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -136,13 +139,6 @@ STATICFILES_DIRS = (
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# メールサーバーへの接続設定
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'spam@gmail.com'
-EMAIL_HOST_PASSWORD = 'gmailパスワード'
-EMAIL_USE_TLS = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -251,35 +247,36 @@ MARKDOWNX_MARKDOWN_EXTENSIONS = [
 # markdownxの画像保存パス
 MARKDOWNX_MEDIA_PATH = datetime.now().strftime('markdownx/%Y/%m/%d')
 
-
 try:
     from .local_settings import *
 except ImportError:
     pass
 
 if not DEBUG:
+    # SendGrid
     SECRET_KEY = os.environ['SECRET_KEY']
+    EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
     # 送信元メールアドレス
-    # DEFAULT_FROM_EMAIL = os.environ['DEFAULT_FROM_EMAIL']
+    DEFAULT_FROM_EMAIL = os.environ['DEFAULT_FROM_EMAIL']
     # # SendGridのAPIキー
-    # SENDGRID_API_KEY = os.environ['SENDGRID_API_KEY']
+    SENDGRID_API_KEY = os.environ['SENDGRID_API_KEY']
     # # 本番環境用
-    # SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+    SENDGRID_SANDBOX_MODE_IN_DEBUG = False
     # # URLのトラッキングをOFF
     # # SENDGRID_TRACK_CLICKS_PLAIN = False
-    # SENDGRID_TRACK_CLICKS_PLAIN = True
-    # SENDGRID_ECHO_TO_STDOUT = False
-    # AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
-    # AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-    # AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+    SENDGRID_TRACK_CLICKS_PLAIN = True
+    SENDGRID_ECHO_TO_STDOUT = False
+    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
 
-    # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-    # DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-    # S3_URL = 'https://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
-    # MEDIA_URL = S3_URL
-    # AWS_S3_FILE_OVERWRITE = False
-    # AWS_DEFAULT_ACL = None
+    S3_URL = 'https://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+    MEDIA_URL = S3_URL
+    AWS_S3_FILE_OVERWRITE = False
+    AWS_DEFAULT_ACL = None
 
     import django_heroku
     django_heroku.settings(locals())
