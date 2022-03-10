@@ -14,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -148,10 +148,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'account.UserAccount'
 
 CORS_ORIGIN_WHITELIST = (
-    'http://localhost',
-    'http://localhost:3000',
-    "http://127.0.0.1",
-    "http://127.0.0.1:3000",
+    # 'http://localhost',
+    # 'http://localhost:3000',
+    # "http://127.0.0.1",
+    # "http://127.0.0.1:3000",
+    'https://mindoki.site',
+    'https://www.mindoki.site',
+    'https://Portfolio3-front.vercel.app',
 )
 
 # 自分独自の設定
