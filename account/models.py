@@ -32,8 +32,10 @@ class UserManager(BaseUserManager):
 
 
 class UserAccount(AbstractBaseUser, PermissionsMixin):
-    # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    # uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    # uuid = models.UUIDField(
+    #     primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField("メールアドレス", max_length=64, unique=True)
     name = models.CharField("名前", max_length=32)
     image = models.ImageField(
