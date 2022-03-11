@@ -45,4 +45,5 @@ class Image(models.Model):
 
     def __str__(self):
         # return 'http://localhost:8000%s%s' % (settings.MEDIA_URL, str(self.image))
-        return '%s%s%s' % (settings.DJANGO_DOMAIN, settings.MEDIA_URL, str(self.image))
+        # return '%s%s%s' % (settings.DJANGO_DOMAIN, settings.MEDIA_URL, str(self.image))
+        return '%s%s' % (settings.MEDIA_URL, str(self.image))
