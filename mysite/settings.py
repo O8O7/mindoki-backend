@@ -6,18 +6,9 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 ALLOWED_HOSTS = ['.herokuapp.com', 'minnadetukurou.herokuapp.com']
-
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -148,17 +139,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'account.UserAccount'
 
 CORS_ORIGIN_WHITELIST = (
-    # 'http://localhost',
-    # 'http://localhost:3000',
-    # "http://127.0.0.1",
-    # "http://127.0.0.1:3000",
     'https://mindoki.site',
     'https://www.mindoki.site',
     'https://Portfolio3-front.vercel.app',
 )
-
-# 自分独自の設定
-DJANGO_DOMAIN = ('http://localhost:8000')
 
 DOMAIN = ('localhost:3000')
 
@@ -250,6 +234,9 @@ MARKDOWNX_MARKDOWN_EXTENSIONS = [
 # markdownxの画像保存パス
 MARKDOWNX_MEDIA_PATH = datetime.now().strftime('markdownx/%Y/%m/%d')
 
+# 自分独自の設定
+DJANGO_DOMAIN = ('http://localhost:8000')
+
 try:
     from .local_settings import *
 except ImportError:
@@ -278,6 +265,10 @@ if not DEBUG:
 
     S3_URL = 'https://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
     MEDIA_URL = S3_URL
+
+    # 自分独自の設定
+    DJANGO_DOMAIN = S3_URL
+
     AWS_S3_FILE_OVERWRITE = False
     AWS_DEFAULT_ACL = None
 
