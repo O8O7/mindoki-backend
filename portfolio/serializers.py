@@ -1,8 +1,15 @@
 from rest_framework import serializers
 
 from common.serializers import CommentSerializer, LanguageSerializer
-from .models import Portfolio
+from .models import Portfolio, Image
 from account.models import UserAccount
+
+
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
+        fields = ['image']
+        # fields = '__all__'
 
 
 class UserPortfolioSerializer(serializers.ModelSerializer):
@@ -12,7 +19,8 @@ class UserPortfolioSerializer(serializers.ModelSerializer):
 
 
 class PortfolioSerializer(serializers.ModelSerializer):
-    image = serializers.StringRelatedField(many=True, read_only=True)
+    # image = serializers.StringRelatedField(many=True, read_only=True)
+    image = ImageSerializer(many=True, read_only=True)
     language = LanguageSerializer()
     comment = CommentSerializer(many=True, read_only=True)
     username = UserPortfolioSerializer()

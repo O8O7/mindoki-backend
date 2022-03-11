@@ -6,6 +6,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+# DEBUG = False
 DEBUG = False
 
 ALLOWED_HOSTS = ['.herokuapp.com', 'minnadetukurou.herokuapp.com']
@@ -267,7 +268,7 @@ if not DEBUG:
     MEDIA_URL = S3_URL
 
     # 自分独自の設定
-    DJANGO_DOMAIN = S3_URL + 'images/'
+    # DJANGO_DOMAIN = S3_URL + 'images/'
 
     AWS_S3_FILE_OVERWRITE = False
     AWS_DEFAULT_ACL = None
