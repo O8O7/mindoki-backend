@@ -267,7 +267,7 @@ if not DEBUG:
     MEDIA_URL = S3_URL
 
     # 自分独自の設定
-    DJANGO_DOMAIN = S3_URL
+    DJANGO_DOMAIN = S3_URL / 'images/'
 
     AWS_S3_FILE_OVERWRITE = False
     AWS_DEFAULT_ACL = None
