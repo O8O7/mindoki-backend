@@ -20,8 +20,8 @@ class LanguageListView(ListAPIView):
     プログラミング言語、カテゴリー一覧と、
     プログラミング言語でfilterをかけて、言語とカテゴリーを出力する
     GET
-    api/article/language_list/
-    api/article/language_list/?lang=
+    api/common/language_list/
+    api/common/language_list/?lang=
     """
     permission_classes = (permissions.AllowAny,)
     queryset = Language.objects.all().order_by("id")

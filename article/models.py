@@ -25,8 +25,8 @@ class Article(models.Model):
 
     is_public = models.BooleanField("公開する", default=False)
 
-    class Meta:
-        ordering = ['-posted_at']
+    # class Meta:
+    #     ordering = ['-posted_at']
 
     def __str__(self):
         return self.title
