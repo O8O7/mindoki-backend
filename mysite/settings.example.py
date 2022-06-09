@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # DEBUG = False
 DEBUG = True
 
-ALLOWED_HOSTS = ['.herokuapp.com', 'minnadetukurou.herokuapp.com']
+ALLOWED_HOSTS = [] # ここにDjangoデプロイ先のURLを記述
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -139,10 +139,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'account.UserAccount'
 
+# ここにNextjsデプロイ先のURLを記述
 CORS_ORIGIN_WHITELIST = (
-    'https://mindoki.site',
-    'https://www.mindoki.site',
-    'https://Portfolio3-front.vercel.app',
 )
 
 DOMAIN = ('localhost:3000')

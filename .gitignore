@@ -5,3 +5,4 @@ __pycache__
 .DS_Store
 mysite/local_settings.py
 db.sqlite3
+mysite/settings.py
